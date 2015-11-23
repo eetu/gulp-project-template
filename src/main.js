@@ -1,8 +1,14 @@
-import {getCommits, getRepo} from './services/github';
-import {render} from './components/repository';
+import React from 'react';
+import App from './containers/app';
+import {render} from 'react-dom';
+import {Provider} from 'react-redux';
+import configureStore from './store/configureStore';
 
-Promise.all([getRepo(), getCommits()])
-.then(([repository, commits]) => {
-  document.body.innerHTML = render(repository, commits);
-});
+const store = configureStore();
 
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);
