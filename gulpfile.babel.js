@@ -178,7 +178,10 @@ gulp.task('watch', () => {
     });
   });
 
-  const bundle = watchify(browserify(browserifyConfig).plugin(hmr));
+  // Enable after react transform supports babel 6
+  // https://github.com/gaearon/react-transform-boilerplate
+  // const bundle = watchify(browserify(browserifyConfig).plugin(hmr));
+  const bundle = watchify(browserify(browserifyConfig));
 
   bundle.on('update', () => {
     const build = bundle.bundle()
@@ -190,7 +193,8 @@ gulp.task('watch', () => {
       return exorcist(config.scripts.destination + config.scripts.filename + '.map');
     }))
     .pipe(gulp.dest(config.scripts.destination))
-    .pipe(duration('Rebundling browserify bundle'));
+    .pipe(duration('Rebundling browserify bundle'))
+    .pipe(browserSync.reload({stream: true})); // remove after hrm works
   }).emit('update');
 });
 
