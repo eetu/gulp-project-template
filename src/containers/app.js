@@ -1,25 +1,14 @@
 import React, {Component, PropTypes} from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import Calculator from '../components/calculator';
 import * as CalculatorActions from '../actions/calculator';
 
 class App extends Component {
-  handleIncrement() {
-    this.props.actions.increment();
-  }
-
-  handleDecrement() {
-    this.props.actions.decrement();
-  }
-
   render() {
     const {calculator, actions} = this.props;
     return (
-      <div>
-        <button onClick={this.handleDecrement.bind(this)}>-</button>
-        {calculator.value}
-        <button onClick={this.handleIncrement.bind(this)}>+</button>
-      </div>
+      <Calculator actions={actions} calculator={calculator}/>
     );
   }
 }
