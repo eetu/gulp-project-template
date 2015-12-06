@@ -16,6 +16,7 @@
     "template"
   ],
   "dependencies": {
+    "babel-preset-react": "^6.3.13",
     "lodash": "^3.9.1",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
