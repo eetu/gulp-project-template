@@ -2,7 +2,7 @@ import browserify from 'browserify';
 import browserSync from 'browser-sync';
 import duration from 'gulp-duration';
 import gulp from 'gulp';
-import hmr from 'browserify-hmr';
+import lrload from 'livereactload';
 import gutil from 'gulp-util';
 import jade from 'gulp-jade';
 import notifier from 'node-notifier';
@@ -178,10 +178,7 @@ gulp.task('watch', () => {
     });
   });
 
-  // Enable after react transform supports babel 6
-  // https://github.com/gaearon/react-transform-boilerplate
-  // const bundle = watchify(browserify(browserifyConfig).plugin(hmr));
-  const bundle = watchify(browserify(browserifyConfig));
+  const bundle = watchify(browserify(browserifyConfig).plugin(lrload));
 
   bundle.on('update', () => {
     const build = bundle.bundle()
@@ -189,12 +186,8 @@ gulp.task('watch', () => {
       .pipe(source(config.scripts.filename));
 
     build
-    .pipe(transform(() => {
-      return exorcist(config.scripts.destination + config.scripts.filename + '.map');
-    }))
     .pipe(gulp.dest(config.scripts.destination))
-    .pipe(duration('Rebundling browserify bundle'))
-    .pipe(browserSync.reload({stream: true})); // remove after hrm works
+    .pipe(duration('Rebundling browserify bundle'));
   }).emit('update');
 });
 
