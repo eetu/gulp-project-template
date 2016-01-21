@@ -9,6 +9,7 @@
 * [ES6+ JavaScript](https://babeljs.io) files to ES5 Javascript through [browserify](http://browserify.org/)
     * You are able to use `import` in your client-side code
 * Uses [BrowserSync](http://www.browsersync.io/) to serve your static files to localhost:9001 and to automatically reload your browser when files change.
+* Hot-swaps modules with [browserify-hmr](https://github.com/AgentME/browserify-hmr). See the [source](https://github.com/leonidas/gulp-project-template/blob/master/src/main.js#L4-L7) for usage.
 
 ## Getting things up and running
 - Install [Node.js](http://nodejs.org)
@@ -44,7 +45,7 @@ Minification, uglification and other tasks you're expected to run before deployi
 All dependencies are meant to be installed with **npm**.
 * JavaScript-files from **node_modules** can be *require()*'d in client-side modules.
 * Third party CSS files should be [imported](https://learnboost.github.io/stylus/docs/import.html). Stylus has been configured to use **node_modules** as one of the base directories so you can import file like this:  `@import 'bootstrap/dist/css/bootstrap.css'`
-* You can either create a new gulp task for copying other assets from directories mentioned above or use an array as a value for [assets sources](https://github.com/leonidas/gulp-project-template/blob/master/gulpfile.js#L38) e.g `source: ['./src/assets/**/*.*', 'node_modules/bootstrap/fonts*/*.*']` *(notice the asterisk after 'fonts'? It makes gulp copy the whole directory instead of just the files inside of it)*
+* You can either create a new gulp task for copying other assets from directories mentioned above or use an array as a value for [assets sources](https://github.com/leonidas/gulp-project-template/blob/master/package.json#L49) e.g `source: ['./src/assets/**/*.*', 'node_modules/bootstrap/fonts*/*.*']` *(notice the asterisk after 'fonts'? It makes gulp copy the whole directory instead of just the files inside of it)*
 
 ## Suggested development tools
 
